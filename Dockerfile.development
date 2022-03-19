@@ -1,0 +1,13 @@
+FROM node:lts-alpine
+LABEL maintainer="ORA Group"
+WORKDIR /usr/src/app
+RUN apk update && apk add python3 g++ make tini && rm -rf /var/cache/apk/*
+COPY . ./
+# Install backend dependencies
+RUN npm ci
+
+ENTRYPOINT ["tini", "--"]
+CMD ["npm", "run", "dev"]
+
+# Backend API
+EXPOSE 8080
