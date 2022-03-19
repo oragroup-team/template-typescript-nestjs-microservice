@@ -86,6 +86,11 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
+  "lint-staged": {
+    "**/*.(js|jsx|ts|tsx)": [
+      "eslint --fix"
+    ]
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
