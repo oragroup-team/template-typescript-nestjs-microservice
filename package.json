@@ -1,10 +1,10 @@
 {
   "name": "template-typescript-nestjs-microservice",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "0.1.0",
+  "description": "Template - Typescript NestJS Microservices",
+  "author": "ORA Group<developer@ora.group>",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
