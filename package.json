@@ -10,7 +10,7 @@
     "build": "nest build",
     "cz": "git-cz",
     "dev": "nest start --watch",
-    "dev:docker": "docker-compose up --build",
+    "dev:docker": "docker-compose -f docker-compose.development.yml up --build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "prepare": "husky install",
     "start": "nest start",
