@@ -1,14 +1,15 @@
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
-import { AppModule } from '@/app.module'
 import { ConfigService } from '@/config/config.service'
 
-async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule)
+import { AppModule as WebAppModule } from '@/modules/web/app.module'
 
-  const config = app.get<ConfigService>(ConfigService)
+async function bootstrapWebApp() {
+  const webApp = await NestFactory.create<NestExpressApplication>(WebAppModule)
 
-  await app.listen(config.get('port'))
+  const config = webApp.get<ConfigService>(ConfigService)
+
+  await webApp.listen(config.get('port'))
 }
 
-bootstrap()
+bootstrapWebApp()

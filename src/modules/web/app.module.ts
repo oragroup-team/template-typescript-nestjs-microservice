@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
-import { AppController } from '@/app.controller'
-import { AppService } from '@/app.service'
+import { AppController } from '@/modules/web/app.controller'
+import { AppService } from '@/modules/web/app.service'
 
 import { ConfigModule } from '@/config/config.module'
 
