@@ -2,14 +2,18 @@ import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { ConfigService } from '@/config/config.service'
 
-import { AppModule as WebAppModule } from '@/modules/web/app.module'
+import { AppModule as WebAppModule } from '@/modules/web/app/app.module'
+import CommonOpenApi from '@/common/openapi'
 
 async function bootstrapWebApp() {
-  const webApp = await NestFactory.create<NestExpressApplication>(WebAppModule)
+  const app = await NestFactory.create<NestExpressApplication>(WebAppModule)
 
-  const config = webApp.get<ConfigService>(ConfigService)
+  const config = app.get<ConfigService>(ConfigService)
 
-  await webApp.listen(config.get('port'))
+  //  Add Swagger
+  CommonOpenApi(app)
+
+  await app.listen(config.get('port'))
 }
 
 bootstrapWebApp()

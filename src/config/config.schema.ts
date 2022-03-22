@@ -1,8 +1,10 @@
 import { Schema } from 'convict'
+import fs from 'fs'
 
 export interface ConfigSchema {
   port: number
   environment: 'development' | 'staging' | 'production' | 'testing'
+  version: string
 }
 
 export const schema: Schema<ConfigSchema> = {
@@ -17,5 +19,11 @@ export const schema: Schema<ConfigSchema> = {
     env: 'NODE_ENV',
     format: ['development', 'staging', 'production', 'testing'],
     default: 'development',
+  },
+  version: {
+    doc: 'The version from package.json',
+    env: 'VERSION',
+    format: 'String',
+    default: JSON.parse(fs.readFileSync('package.json', 'utf8')).version,
   },
 }
