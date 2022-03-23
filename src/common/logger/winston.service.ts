@@ -6,6 +6,7 @@ import * as winston from 'winston'
 import CloudWatchTransport from 'winston-cloudwatch'
 import { ConfigService } from '@/config/config.service'
 import { LoggerService } from '@nestjs/common'
+import * as Transport from 'winston-transport'
 
 export class LoggerWinstonService {
   constructor(private configService: ConfigService) {
@@ -48,9 +49,19 @@ export class LoggerWinstonService {
    * Creates the winston logger
    */
   createWinstonLogger(): LoggerService {
+    const transports: Transport[] = [this.createConsoleLogger()]
+    const options: winston.LoggerOptions = {}
+
+    if (this.configService.get('environment') !== 'development') {
+      options.format = winston.format.uncolorize() //Uncolorize logs as weird character encoding appears when logs are colorized in cloudwatch.
+      transports.push(this.createCloudwatchLogger())
+    }
+
+    options.transports = transports
+
     return WinstonModule.createLogger({
       format: winston.format.uncolorize(), //Uncolorize logs as weird character encoding appears when logs are colorized in cloudwatch.
-      transports: [this.createConsoleLogger(), this.createCloudwatchLogger()],
+      transports,
     })
   }
 }
