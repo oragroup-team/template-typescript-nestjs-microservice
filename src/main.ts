@@ -1,5 +1,8 @@
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config()
+
 import { ConfigService } from '@/config/config.service'
 
 import { AppModule as WebAppModule } from '@/modules/web/app/app.module'
