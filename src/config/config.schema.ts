@@ -5,6 +5,11 @@ export interface ConfigSchema {
   port: number
   environment: 'development' | 'staging' | 'production' | 'testing'
   version: string
+  logGroupName: string
+  logStreamName: string
+  awsAccessKeyId: string
+  awsSecretKey: string
+  awsRegion: string
 }
 
 export const schema: Schema<ConfigSchema> = {
@@ -25,5 +30,35 @@ export const schema: Schema<ConfigSchema> = {
     env: 'VERSION',
     format: 'String',
     default: JSON.parse(fs.readFileSync('package.json', 'utf8')).version,
+  },
+  logGroupName: {
+    doc: 'Cloudwatch group name',
+    env: 'CLOUDWATCH_GROUP_NAME',
+    format: 'String',
+    default: '',
+  },
+  logStreamName: {
+    doc: 'Cloudwatch stream name',
+    env: 'CLOUDWATCH_STREAM_NAME',
+    format: 'String',
+    default: '',
+  },
+  awsAccessKeyId: {
+    doc: 'AWS Access Key Id',
+    env: 'AWS_ACCESS_KEY_ID',
+    format: 'String',
+    default: '',
+  },
+  awsSecretKey: {
+    doc: 'AWS Secret Key',
+    env: 'AWS_SECRET_KEY',
+    format: 'String',
+    default: '',
+  },
+  awsRegion: {
+    doc: 'AWS REGION',
+    env: 'AWS_REGION',
+    format: 'String',
+    default: 'ap-southeast-1',
   },
 }
